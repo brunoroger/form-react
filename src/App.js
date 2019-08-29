@@ -1,25 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Formik, Form, Field } from 'formik';
+import * as RequestFactory  from './factory/requestFactory';
 import './App.css';
 
-function App() {
+const App = () => {
+
+  const handleSubmit = async(obj) => {
+    try{
+      const res = await RequestFactory.add(obj);
+
+      console.log(res.data);
+    }catch(e){
+      console.log('erru');
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Formik onSubmit={handleSubmit} initialValues={
+      {
+        email: '',
+        name: ''
+      }
+    }>
+      <Form>
+        <Field className="form-control" type="text" name="email" placeholder="Email" />
+        <br/>
+        <Field className="form-control" type="text" name="name" placeholder="Name" />
+        <br/>
+        <button type="submit">Send</button>
+      </Form>
+    </Formik>
   );
 }
 
