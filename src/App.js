@@ -11,7 +11,7 @@ const App = () => {
 
       console.log(res.data);
     }catch(e){
-      console.log('erru');
+      console.log('error');
     }
   };
 
